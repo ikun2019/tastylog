@@ -5,11 +5,32 @@
   <%- include('./include/metadata.ejs') %>
   <title><%= pageTitle %></title>
   <%- include('./include/stylesheets.ejs') %>
+  <link rel="stylesheet" href="/public/stylesheets/index.css">
 </head>
 
 <body>
   <div class="outerframe">
     <%- include('./include/navbar.ejs') %>
+    <main class="container d-flex justify-content-md-center" role="main">
+      <div class="align-self-center col-md-8">
+        <h1 class="display-1 text-center my-5">
+          <i class="fa fa-fw fa-utensils"></i>
+          Search
+        </h1>
+        <form action="/search" class="my-5">
+          <div class="form-group row justify-content-center">
+            <div class="input-group my-3 col-sm-8">
+              <input type="text" name="keyword" id="keyword" class="form-control" autofocus="autofocus">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">
+                  <i class="fa fa-fw fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
     <%- include('./include/footer.ejs') %>
   </div>
   <%- include('./include/javascripts.ejs') %>

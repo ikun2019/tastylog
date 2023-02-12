@@ -22,6 +22,8 @@ const app = express();
 // * ejsをappにマウントする
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+// * サーバー情報の隠蔽
+app.disable('x-powered-by');
 
 // * 2faviconの設定
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
