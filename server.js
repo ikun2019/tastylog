@@ -3,32 +3,33 @@ const colors = require('colors');
 // * 1データベース設定の読み込み
 const sequelize = require('./util/database');
 
-// * 1ejsの読み込み
-const ejs = require('ejs');
-
 // * pathの読み込み
 const path = require('path');
 // * expressの読み込み
 const express = require('express');
+// * 1faviconの読み込み
+const favicon = require('serve-favicon');
 
+// * 1ルーターの読み込み
+const indexRouter = require('./routes/index');
+
+// * 環境変数の使用に関する設定
 const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
 
-// * 2ejsをappにマウントする
+// * ejsをappにマウントする
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+// * 2faviconの設定
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 // * 静的ファイルの読み込み
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, '/public')));
 
-// * ルーティング
-app.get('/', (req, res, next) => {
-  res.status(200).json({
-    message: 'Hello World'
-  });
-});
+// * 2ルーティングのマウント
+app.use('/', indexRouter);
 
 // * 2データベースとappを同期
 sequelize
