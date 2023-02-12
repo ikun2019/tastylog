@@ -4,11 +4,77 @@
   <%- include('../include/metadata.ejs') %>
   <title>Document</title>
   <%- include('../include/stylesheets.ejs') %>
+  <link rel="stylesheet" href="/public/stylesheets/shop.css">
 </head>
 <body>
   <div class="outerframe">
     <%- include('../include/navbar.ejs') %>
-    <h1><%= shop.name %></h1>
+    <main class="container">
+      <div class="border-bottom mt-5 mb-5">
+        <h1 class="display-4"><%= shop.name %></h1>
+        <p class="h3">
+          <span class="rate-star" style="--rate: <%= (shop.score/5.00)*100 %>%"></span>
+          <span><%= shop.score %></span>
+        </p>
+      </div>
+      <div>
+        <img class="img-fluid" src="/public/images/dummy/1150x250.png" alt="">
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <h2 class="border-bottom mt-5 mb-2"><i class="fa fa-fw fa-book"></i>店舗情報</h2>
+          <table class="table table-border">
+            <colgroup>
+              <col class="bg-light" style="width: 10rem"></col>
+            </colgroup>
+            <tr>
+              <th>店名</th>
+              <td><%= shop.name %></td>
+            </tr>
+            <tr>
+              <th>カテゴリー</th>
+              <td><%= shop.categories %></td>
+            </tr>
+            <tr>
+              <th>電話</th>
+              <td><%= shop.tel %></td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td>
+                <div><%= shop.address %></div>
+                <div id="mapid"></div>
+              </td>
+            </tr>
+            <tr>
+              <th>定休日</th>
+              <td><%= shop.holiday %></td>
+            </tr>
+            <tr>
+              <th>座席数</th>
+              <td><%= shop.seats %></td>
+            </tr>
+            <tr>
+              <th>価格帯</th>
+              <td><%= shop.price_range %></td>
+            </tr>
+          </table>
+          <div class="position-relative">
+            <h2 class="border-bottom mt-5 mb-5pb-2"><i class="fa fa-fw fa-comments"></i>口コミ</h2>
+            <div class="position-absolute" style="right:0; top: 0;">
+              <a class="btn btn-outline-success" href="#">投稿する</a>
+            </div>
+          </div>
+          <div>
+            <!-- todo レビュー -->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h2 class="border-bottom mt-5 mb-5 pb-2"><i class="fa fa-fw fa-heart"></i>おすすめのお店</h2>
+          <!-- todo recommends -->
+        </div>
+      </div>
+    </main>
     <%- include('../include/footer.ejs') %>
   </div>
   <%- include('../include/javascripts.ejs') %>

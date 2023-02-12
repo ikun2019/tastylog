@@ -23,8 +23,8 @@ router.get('/', (req, res, next) => {
   Shop
     .findAll()
     .then(shops => {
-      res.status(200).json({
-        shops: shops
+      res.render('shops/index', {
+        shop: shops[0]
       });
     })
     .catch(err => {
