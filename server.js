@@ -1,7 +1,10 @@
 const colors = require('colors');
 
 // * 1データベース設定の読み込み
-const sequelize = require('./util/database');
+const sequelize = require('./config/database');
+// * loggerの読み込み
+const logger = require('./util/logger');
+const applicationLogger = require('./middlewares/applicationlogger');
 
 // * pathの読み込み
 const path = require('path');
@@ -33,15 +36,23 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 // * 2ルーティングのマウント
 app.use('/', indexRouter);
 
+// * ApplicationLoggerの設定
+app.use(applicationLogger());
+
 // * 2データベースとappを同期
 sequelize
   .sync()
   .then(result => {
     console.log(result);
     app.listen(process.env.PORT, () => {
-      console.log(`Server is running PORT:${process.env.PORT}`.bgGreen);
+      // logger.console.info(`Server is running PORT:${process.env.PORT}`.bgGreen);
+      logger.application.info(`Server is running PORT:${process.env.PORT}`.bgGreen);
     });
   })
   .catch(err => {
     console.log(`${err}`.bgRed);
   });
+
+  // app.listen(process.env.PORT, () => {
+  //   logger.console.info(`Application listening at ${process.env.PORT}`);
+  // });
