@@ -5,6 +5,7 @@ const sequelize = require('./config/database');
 // * loggerの読み込み
 const logger = require('./util/logger');
 const applicationLogger = require('./middlewares/applicationlogger');
+const accessLogger = require('./middlewares/accesslogger');
 
 // * pathの読み込み
 const path = require('path');
@@ -33,10 +34,13 @@ app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 // * 静的ファイルの読み込み
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
+// * AccessLoggerの設置
+app.use(accessLogger());
+
 // * 2ルーティングのマウント
 app.use('/', indexRouter);
 
-// * ApplicationLoggerの設定
+// * ApplicationLoggerの設置
 app.use(applicationLogger());
 
 // * 2データベースとappを同期
