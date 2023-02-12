@@ -3,8 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   res.render('index.ejs', {
-    pageTitle: 'Index Page',
-    message: 'Hello World!'
+    pageTitle: 'Index Page'
   });
 });
 

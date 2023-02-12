@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <%- include('../include/metadata.ejs') %>
+  <title>Document</title>
+  <%- include('../include/stylesheets.ejs') %>
+</head>
+<body>
+  <div class="outerframe">
+    <%- include('../include/navbar.ejs') %>
+    <main class="container" role="main">
+      <form class="pt-5" action="/admin/add-shop" method="POST">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+          <label for="kana" class="form-label">Kana</label>
+          <input type="text" class="form-control" id="kana" name="kana">
+        </div>
+        <div class="mb-3">
+          <label for="post_code" class="form-label">Post Code</label>
+          <input type="text" class="form-control" id="post_code" name="post_code">
+        </div>
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" id="address" name="address">
+        </div>
+        <div class="mb-3">
+          <label for="tel" class="form-label">Telephone Number</label>
+          <input type="text" class="form-control" id="tel" name="tel">
+        </div>
+        <div class="mb-3">
+          <label for="holiday" class="form-label">Holiday</label>
+          <input type="text" class="form-control" id="holiday" name="holiday">
+        </div>
+        <div class="mb-3">
+          <label for="seats" class="form-label">seats</label>
+          <input type="number" class="form-control" id="seats" name="seats">
+        </div>
+        <div class="mb-3">
+          <label for="price_range" class="form-label">Price Range</label>
+          <input type="text" class="form-control" id="price_range" name="price_range">
+        </div>
+        <div class="mb-3">
+          <label for="score" class="form-label">Score</label>
+          <input type="number" class="form-control" id="score" name="score">
+        </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <input type="number" class="form-control" id="status" name="status">
+        </div>
+        <div class="mb-3">
+          <label for="geolocation_latitude" class="form-label">経度</label>
+          <input type="text" class="form-control" id="geolocation_latitude" name="geolocation_latitude">
+        </div>
+        <div class="mb-3">
+          <label for="geolocation_longtude" class="form-label">緯度</label>
+          <input type="text" class="form-control" id="geolocation_longtude" name="geolocation_longtude">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </main>
+    <%- include('../include/footer.ejs') %>
+  </div>
+  <%- include('../include/javascripts.ejs') %>
+</body>
+</html>

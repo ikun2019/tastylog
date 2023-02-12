@@ -1,0 +1,17 @@
+[
+  {
+    "id" :1,
+    "name": "本格中華 イノシシ",
+    "kana": "ホンカクチュウカ イノシシ",
+    "post_code": "6660141",
+    "address": "兵庫県川西市虫生8-12-9 サンハイツ虫生 15F",
+    "tel": "072-317-6814",
+    "holiday": "月",
+    "seats": "40",
+    "price_range": "13,000-16,000",
+    "score": "3.92",
+    "status": "1",
+    "geolocation_latitude": "34.8771059",
+    "geolocation_logtude": "135.3930483"
+  }
+]
