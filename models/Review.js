@@ -8,8 +8,16 @@ const Review = sequelize.define('t_review', {
     allowNull: false,
     primaryKey: true
   },
-  review: {
+  description: {
     type: Sequelize.STRING,
+    allowNull: false
+  },
+  visit: {
+    type: Sequelize.DATE,
+    allowNull: true
+  },
+  rate: {
+    type: Sequelize.FLOAT,
     allowNull: false
   }
 },{

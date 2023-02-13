@@ -1,11 +1,14 @@
 // ルート
 const router = require('express').Router();
 const Shop = require('../models/Shop');
+const Review = require('../models/Review');
 
 // * GET => /shops/index.ejs
 router.get('/:id', (req, res, next) => {
   const shopID = parseInt(req.params.id);
-  Shop.findByPk(shopID)
+  Shop.findByPk(shopID, {
+    include: [{ model: Review }]
+  })
     .then(shop => {
       if (!shop) {
         res.redirect('/');
