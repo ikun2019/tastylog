@@ -17,6 +17,10 @@ const express = require('express');
 // * 1faviconの読み込み
 const favicon = require('serve-favicon');
 
+// * モデルの読み込み
+const Shop = require('./models/Shop');
+const Review = require('./models/Review');
+
 // * 1ルーターの読み込み
 const indexRouter = require('./routes/index');
 const shopsRouter = require('./routes/shops');
@@ -49,6 +53,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', indexRouter);
 app.use('/shops', shopsRouter);
 app.use('/admin', adminRouter);
+
+// * アソシエーション
+Shop.hasMany(Review);
+Review.belongsTo(Shop, { constraints: true, onDelete: 'CASCADE' });
 
 // * ApplicationLoggerの設置
 app.use(applicationLogger());
