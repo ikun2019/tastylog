@@ -23,6 +23,7 @@ const Review = require('./models/Review');
 
 // * 1ルーターの読み込み
 const indexRouter = require('./routes/index');
+const searchRouter = require('./routes/search');
 const shopsRouter = require('./routes/shops');
 const adminRouter = require('./routes/admin');
 
@@ -51,6 +52,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // * 2ルーティングのマウント
 app.use('/', indexRouter);
+app.use('/search', searchRouter);
 app.use('/shops', shopsRouter);
 app.use('/admin', adminRouter);
 
