@@ -22,6 +22,7 @@ router.get('/', async (req, res, next) => {
       results = await Shop.findAll();
     }
     res.render('search/list.ejs', {
+      keyword: keyword,
       results: results
     });
   } catch (err) {

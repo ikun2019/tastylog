@@ -4,16 +4,39 @@
   <%- include('../include/metadata.ejs') %>
   <title>Document</title>
   <%- include('../include/stylesheets.ejs') %>
+  <link rel="stylesheet" href="/public/stylesheets/shop.css">
 </head>
 <body>
-  <%- include('../include/navbar.ejs') %>
-  <main role="main">
-    <ul>
-      <% for (let shop of results) { %>
-        <li><%= shop.name %></li>
-      <% } %>
-    </ul>
-  </main>
-  <%- include('../include/footer.ejs') %>
+  <div class="outerframe">
+    <%- include('../include/navbar.ejs') %>
+    <main class="container" role="main">
+      <div class="border-bottom">
+        <form action="/search" method="GET" class="mt-5 mb-5">
+          <div class="form-group row justify-content-center">
+            <div class="input-group mt-3 mb-3 col-sm-8">
+              <input type="text" name="keyword" id="keyword" class="form-control" value="<%= keyword %>" autofocus>
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary"><i class="fa fa-fw fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card-columns mt-5">
+        <% for (let item of results) { %>
+            <%- include('./item.ejs', { item: item }) %>
+        <% } %>
+      </div>
+
+      <nav>
+        <up class="pagination justify-content-center">
+          <!-- TODO: pagination -->
+        </up>
+      </nav>
+    </main>
+    <%- include('../include/footer.ejs') %>
+  </div>
+  <%- include('../include/javascripts.ejs') %>
 </body>
 </html>
