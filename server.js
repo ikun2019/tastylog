@@ -48,8 +48,11 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 // * AccessLoggerの設置
 app.use(accessLogger());
 
+// * フォームの読み込み
+app.use(express.urlencoded({ extended: true }));
+
 // * body-parserの設置
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 // * 2ルーティングのマウント
 app.use('/search', searchRouter);
