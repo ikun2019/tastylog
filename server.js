@@ -26,6 +26,7 @@ const indexRouter = require('./routes/index');
 const searchRouter = require('./routes/search');
 const shopsRouter = require('./routes/shops');
 const adminRouter = require('./routes/admin');
+const accountRouter = require('./routes/account');
 
 // * 環境変数の使用に関する設定
 const dotenv = require('dotenv');
@@ -51,10 +52,11 @@ app.use(accessLogger());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // * 2ルーティングのマウント
-app.use('/', indexRouter);
 app.use('/search', searchRouter);
 app.use('/shops', shopsRouter);
 app.use('/admin', adminRouter);
+app.use('/account', accountRouter);
+app.use('/', indexRouter);
 
 // * アソシエーション
 Shop.hasMany(Review);
