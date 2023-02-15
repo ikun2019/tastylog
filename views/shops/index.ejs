@@ -67,7 +67,7 @@
           </div>
           <div>
             <% for (let review of shop.t_reviews) { %>
-              <%- include('./review.ejs', review) %>
+              <%- include('./review.ejs', { review: review }) %>
             <% } %>
           </div>
         </div>

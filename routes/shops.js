@@ -24,7 +24,9 @@ router.get('/:id', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   Shop
-    .findAll()
+    .findAll({
+      include: Review
+    })
     .then(shops => {
       res.render('shops/index', {
         shop: shops[0]
