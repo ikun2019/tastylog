@@ -9,7 +9,9 @@ router.get('/regist/:shopId(\\d+)', async (req, res, next) => {
     results = await Shop.findByPk(shopId);
     console.log(results);
     res.render('account/reviews/regist-form.ejs', {
-      results: results
+      shopId: shopId,
+      shopName: results.name,
+      shop: results
     });
   } catch (err) {
     next(err);
