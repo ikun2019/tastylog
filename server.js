@@ -3,7 +3,9 @@ const colors = require('colors');
 // * 1データベース設定の読み込み
 const sequelize = require('./config/database');
 // * 1body-parserの読み込み
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
+// * 1cookie-paraserの読み込み
+const cookie = require('cookie-parser');
 
 // * loggerの読み込み
 const logger = require('./util/logger');
@@ -51,6 +53,9 @@ app.use(accessLogger());
 
 // * フォームの読み込み
 app.use(express.urlencoded({ extended: true }));
+
+// * ミドルウェア組み込み
+app.use(cookie());
 
 // * ユーザー情報のミドルウェア
 app.use((req, res, next) => {
