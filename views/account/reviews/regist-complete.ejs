@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <%- include('../../include/metadata.ejs') %>
+  <title><%= pageTitle %></title>
+  <%- include('../../include/stylesheets.ejs') %>
 </head>
+
 <body>
-  
+  <div class="outerframe">
+    <%- include('../../include/navbar.ejs') %>
+    <main class="container" role="main">
+      <div class="border-bottom my-5">
+        <h1>口コミの投稿</h1>
+      </div>
+
+      <div class="alert alert-success my-5">
+        投稿が完了しました
+      </div>
+
+      <div class="text-center my-5">
+        <a href="/shops/<%= shopId %>" class="btn btn-outline-primary">ショップページへ戻る</a>
+      </div>
+    </main>
+    <%- include('../../include/footer.ejs') %>
+  </div>
+  <%- include('../../include/javascripts.ejs') %>
 </body>
+
 </html>

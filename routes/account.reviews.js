@@ -111,7 +111,10 @@ router.post('/regist/execute', async (req, res, next) => {
       });
     })
     .then(result => {
-      res.redirect(`/shops/${shopId}`);
+      res.render('account/reviews/regist-complete', {
+        shopId,
+        pageTitle: ''
+      });
     })
     .catch(err => {
       console.log(err);
