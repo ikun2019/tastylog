@@ -20,6 +20,7 @@ const favicon = require('serve-favicon');
 // * モデルの読み込み
 const Shop = require('./models/Shop');
 const Review = require('./models/Review');
+const User = require('./models/User');
 
 // * 1ルーターの読み込み
 const indexRouter = require('./routes/index');
@@ -51,8 +52,17 @@ app.use(accessLogger());
 // * フォームの読み込み
 app.use(express.urlencoded({ extended: true }));
 
-// * body-parserの設置
-// app.use(bodyParser.urlencoded({ extended: false }));
+// * ユーザー情報のミドルウェア
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
 
 // * 2ルーティングのマウント
 app.use('/search', searchRouter);
@@ -64,6 +74,9 @@ app.use('/', indexRouter);
 // * アソシエーション
 Shop.hasMany(Review);
 Review.belongsTo(Shop, { constraints: true, onDelete: 'CASCADE' });
+
+// User.hasMany(Review);
+// Review.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 
 // * ApplicationLoggerの設置
 app.use(applicationLogger());

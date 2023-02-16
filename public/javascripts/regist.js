@@ -7,7 +7,7 @@ let btnSubmit_onclick = function (event) {
 };
 
 let document_onready = function (event) {
-  $("input[type=''submit]").on('click', btnSubmit_onclick);
+  $("input[type='submit']").on('click', btnSubmit_onclick);
 };
 
 $(document).ready(document_onready);

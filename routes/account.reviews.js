@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const Shop = require('../models/Shop');
+const Review = require('../models/Review');
 const moment = require('moment');
 const DATE_FORMAT = 'YYYY/MM/DD';
+const sequelize = require('../config/database');
 
 let date;
 
@@ -65,7 +67,8 @@ router.post('/regist/confirm', (req, res, next) => {
   res.render('account/reviews/regist-confirm', {
     shopId,
     shopName,
-    review
+    review,
+    moment
   })
 });
 
@@ -81,14 +84,39 @@ router.post('/regist/:shopId(\\d+)', (req, res, next) => {
 });
 
 // * POST => /account/reviews/regist/execute
-// router.post('/regist/execute', (req, res, next) => {
-//   let review = createReviewData(req);
-//   let { shopId, shopName } = req.body;
-//   res.render('account/reviews/regist-form', {
-//     shopId,
-//     shopName,
-//     review
-//   });
-// });
+router.post('/regist/execute', async (req, res, next) => {
+  let error = validateReviewData(req);
+  let review = createReviewData(req);
+  let { shopId, shopName } = req.body;
+
+  if (error) {
+    return res.render('account/reviews/regist-form', {
+      shopId,
+      shopName,
+      review,
+      error
+    });
+  }
+  await Shop.findByPk(shopId)
+    .then(shop => {
+      const description = req.body.description;
+      const visit = req.body.visit;
+      const rate = req.body.score;
+      // const tUserId = req.user.id;
+      Review.create({
+        shopId,
+        description,
+        visit,
+        rate
+      });
+    })
+    .then(result => {
+      res.redirect(`/shops/${shopId}`);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+});
+
 
 module.exports = router;
