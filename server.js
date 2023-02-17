@@ -2,8 +2,11 @@ const colors = require('colors');
 
 // * 1データベース設定の読み込み
 const sequelize = require('./config/database');
-// * 1body-parserの読み込み
-// const bodyParser = require('body-parser');
+// * AppConfigの読み込み
+const appconfig = require('./config/application.config');
+// * 1Sessionの読み込み
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 // * 1cookie-paraserの読み込み
 const cookie = require('cookie-parser');
 
@@ -51,11 +54,26 @@ app.use('/public', express.static(path.join(__dirname, '/public')));
 // * AccessLoggerの設置
 app.use(accessLogger());
 
+
+// * 2Cookieミドルウェア組み込み
+app.use(cookie());
+// * 2Sessionの読み込み
+app.use(session({
+  store: new MySQLStore({
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: '02151353',
+    database: 'mysql'
+  }),
+  secret: appconfig.security.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  name: 'sid'
+}));
 // * フォームの読み込み
 app.use(express.urlencoded({ extended: true }));
 
-// * ミドルウェア組み込み
-app.use(cookie());
 
 // * ユーザー情報のミドルウェア
 app.use((req, res, next) => {
