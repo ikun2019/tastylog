@@ -32,6 +32,7 @@ const favicon = require('serve-favicon');
 const Shop = require('./models/Shop');
 const Review = require('./models/Review');
 const User = require('./models/User');
+const LoginHistory = require('./models/LoginHistory');
 
 // * 1ルーターの読み込み
 const indexRouter = require('./routes/index');
@@ -108,6 +109,8 @@ app.use('/', indexRouter);
 // * アソシエーション
 Shop.hasMany(Review);
 Review.belongsTo(Shop, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(LoginHistory, { onDelete: 'CASCADE' });
+LoginHistory.belongsTo(User);
 
 // User.hasMany(Review);
 // Review.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
