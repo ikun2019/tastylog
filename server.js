@@ -4,6 +4,10 @@ const colors = require('colors');
 const sequelize = require('./config/database');
 // * AppConfigの読み込み
 const appconfig = require('./config/application.config');
+// * AccessControlの読み込み
+const accesscontrol = require('./config/security/accesscontrol');
+// * 1connect-flashの読み込みエラー表示
+const flash = require('connect-flash');
 // * 1Sessionの読み込み
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
@@ -73,6 +77,8 @@ app.use(session({
 }));
 // * フォームの読み込み
 app.use(express.urlencoded({ extended: true }));
+app.use(flash());
+app.use(...accesscontrol.initialize());
 
 
 // * ユーザー情報のミドルウェア
