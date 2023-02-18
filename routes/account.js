@@ -7,6 +7,10 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post('/login', authenticate());
+// ログイン後の画面
+router.get('/', (req, res, next) => {
+  res.render('./account/index');
+});
 
 router.use('/reviews', accountReviews);
 
