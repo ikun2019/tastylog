@@ -14,6 +14,8 @@ const MySQLStore = require('express-mysql-session')(session);
 // * 1cookie-paraserの読み込み
 const cookie = require('cookie-parser');
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 // * loggerの読み込み
 const logger = require('./util/logger');
 const applicationLogger = require('./middlewares/applicationlogger');
@@ -70,6 +72,9 @@ app.use(session({
     password: '02151353',
     database: 'mysql'
   }),
+  cookie: {
+    secure: IS_PRODUCTION
+  },
   secret: appconfig.security.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
