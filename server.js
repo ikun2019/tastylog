@@ -100,11 +100,19 @@ app.use((req, res, next) => {
 });
 
 // * 2ルーティングのマウント
-app.use('/search', searchRouter);
-app.use('/shops', shopsRouter);
-app.use('/admin', adminRouter);
-app.use('/account', accountRouter);
-app.use('/', indexRouter);
+app.use('/', (() => {
+  const router = express.Router();
+  router.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    next();
+  });
+  router.use('/search', searchRouter);
+  router.use('/shops', shopsRouter);
+  router.use('/admin', adminRouter);
+  router.use('/account', accountRouter);
+  router.use('/', indexRouter);
+  return router;
+})());
 
 // * アソシエーション
 Shop.hasMany(Review);
