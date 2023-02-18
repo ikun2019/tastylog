@@ -110,6 +110,7 @@ app.use('/', (() => {
   router.use('/shops', shopsRouter);
   router.use('/admin', adminRouter);
   router.use('/account', accountRouter);
+  app.use('/test', (req, res) => { throw new Error('test error')});
   router.use('/', indexRouter);
   return router;
 })());
@@ -125,6 +126,16 @@ LoginHistory.belongsTo(User);
 
 // * ApplicationLoggerの設置
 app.use(applicationLogger());
+
+// * カスタムエラーページ
+app.use((req, res, next) => {
+  res.status(404)
+    .render('./404');
+});
+app.use((err, req, res, next) => {
+  res.status(500)
+    .render('./500');
+});
 
 // * 2データベースとappを同期
 sequelize

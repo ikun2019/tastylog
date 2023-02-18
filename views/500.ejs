@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include('./include/metadata.ejs') %>
+  <title>500</title>
+  <%- include('./include/stylesheets.ejs') %>
+</head>
+
+<body>
+  <div class="outerframe">
+    <%- include('./include/navbar.ejs') %>
+    <main class="container d-flex justify-content-md-center" role="main">
+      <div class="align-self-center col-md-8 text-center">
+        <div class="display-1">500</div>
+        <div>Internal Server Error</div>
+      </div>
+    </main>
+    <%- include('./include/footer.ejs') %>
+  </div>
+  <%- include('./include/javascripts.ejs') %>
+</body>
+
+</html>
