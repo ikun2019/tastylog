@@ -107,7 +107,7 @@ app.use(applicationLogger());
 // * 2データベースとappを同期
 sequelize
   // .sync({ force: true })
-  .sync()
+  .sync({ alter: true })
   .then(result => {
     console.log(result);
     app.listen(process.env.PORT, () => {
