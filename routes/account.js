@@ -8,10 +8,10 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login', authenticate());
 // ログイン後の画面
-router.get('/', (req, res, next) => {
+router.get('/',authorize(PRIVILEGE.NORMAL), (req, res, next) => {
   res.render('./account/index');
 });
 
-router.use('/reviews', accountReviews);
+router.use('/reviews', authorize(PRIVILEGE.NORMAL), accountReviews);
 
 module.exports = router;
