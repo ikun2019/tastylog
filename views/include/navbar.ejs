@@ -11,8 +11,28 @@
           <a href="/search" class="nav-link">Search</a>
         </li>
       </ul>
-      <a href="/account/login" class="btn btn-outline-success my-2 my-sm-0 mr-2">ログイン</a>
-      <a href="#" class="btn btn-outline-success my-2 my-sm-0">新規登録</a>
+      <% if (locals.user) { %>
+        <form action="/account/logout" method="POST" class="form-inline my-2 my-lg-0">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenulink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= (locals.user.name || '(表示名未設定)') %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenulink">
+                <a href="#" class="dropdown-item">ホーム</a>
+                <a href="#" class="dropdown-item">マイ食レポ</a>
+                <a href="#" class="dropdown-item">設定</a>
+                <span class="dropdown-item">
+                  <input type="submit" class="btn btn-outline success my-2 my-sm-0" value="ログアウト">
+                </span>
+              </div>
+            </li>
+          </ul>
+        </form>
+      <% } else { %>
+        <a href="/account/login" class="btn btn-outline-success my-2 my-sm-0 mr-2">ログイン</a>
+        <a href="#" class="btn btn-outline-success my-2 my-sm-0">新規登録</a>
+      <% } %>
     </div>
   </div>
 </nav>

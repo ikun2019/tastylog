@@ -8,10 +8,16 @@ router.get('/login', (req, res, next) => {
 
 router.post('/login', authenticate());
 // ログイン後の画面
-router.get('/',authorize(PRIVILEGE.NORMAL), (req, res, next) => {
+router.get('/', (req, res, next) => {
   res.render('./account/index');
 });
 
-router.use('/reviews', authorize(PRIVILEGE.NORMAL), accountReviews);
+// ログアウトの処理
+router.post('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/account/login');
+})
+
+router.use('/reviews', accountReviews);
 
 module.exports = router;
