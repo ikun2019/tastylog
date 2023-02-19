@@ -43,6 +43,7 @@ const accountRouter = require('./routes/account');
 
 // * 環境変数の使用に関する設定
 const dotenv = require('dotenv');
+const { resolve } = require('path');
 dotenv.config();
 
 const app = express();
@@ -54,9 +55,11 @@ app.set('views', 'views');
 app.disable('x-powered-by');
 
 // * 2faviconの設定
-app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
+// app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
+app.use(favicon(path.join(process.cwd(), '/public/favicon.ico')));
 // * 静的ファイルの読み込み
-app.use('/public', express.static(path.join(__dirname, '/public')));
+// app.use('/public', express.static(path.join(__dirname, '/public')));
+app.use('/public', express.static(path.join(process.cwd(), '/public')));
 
 // * AccessLoggerの設置
 app.use(accessLogger());
@@ -143,7 +146,7 @@ sequelize
   .sync({ alter: true })
   .then(result => {
     console.log(result);
-    app.listen(process.env.PORT, () => {
+    const server = app.listen(process.env.PORT, () => {
       // logger.console.info(`Server is running PORT:${process.env.PORT}`.bgGreen);
       logger.application.info(`Server is running PORT:${process.env.PORT}`.bgGreen);
     });
